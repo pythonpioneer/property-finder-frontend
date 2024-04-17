@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -12,6 +14,18 @@ root.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<App />
+			<ToastContainer
+					role="alert"
+					position="bottom-right"
+					autoClose={1300}
+					hideProgressBar={false}
+					newestOnTop={true}
+					pauseOnHover={false}
+					pauseOnFocusLoss={false}
+					closeOnClick
+					draggable
+					toastClassName={'toast-color'}
+				/>
 		</Provider>
 	</React.StrictMode>
 );
