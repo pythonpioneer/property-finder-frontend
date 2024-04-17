@@ -36,7 +36,7 @@ export default function Navbar() {
 						</Link>
 					}
 					<Link to='/user'>
-						<i className="fa-solid fa-user sa" style={{ fontSize: '28px', backgroundColor: 'transparent', marginRight: '12px', color: '#b9b9b9' }}></i>
+						<i className="fa-solid fa-user" style={{ fontSize: '28px', backgroundColor: 'transparent', marginRight: '10px', color: '#b9b9b9' }}></i>
 					</Link>
 				</div>
 			</nav>

@@ -7,6 +7,7 @@ import LoginForm from './components/forms/LoginForm';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from './features/userSlice';
+import UserDetails from './components/app/UserDetails';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 				<Route exact path="/" element={ <Box /> } />
 				<Route exact path="/register" element={ <RegistrationForm /> } />
 				<Route exact path="/login" element={ <LoginForm /> } />
+				<Route exact path="/user" element={ <UserDetails /> } />
 			</Routes>
 		</>
 	);

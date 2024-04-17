@@ -50,7 +50,7 @@ input {
 @media (min-width: 766px) and (max-width: 1024px) {
     .col-md-4 {
         margin-left: 20%;
-        margin-right: 30%; 
+        margin-right: 30%;
     }
     .card-design {
         width: 330px;
@@ -67,5 +67,31 @@ input {
     }
     .login-card {
         margin-top: 150px;
+    }
+}
+
+.user-card {
+    width: 90%;
+    margin: auto;
+    margin-top: 120px;
+    border-radius: 30px;
+    border: 2px solid black;
+}
+.user-card-body {
+    border-radius: 0;
+}
+.card-header {
+    font-weight: bolder;
+    background-color: #af1a1a;
+    color: #fcee9b;
+}
+.text-bold {
+    font-weight: bold;
+}
+
+/* Media query to reduce text size for smaller screens */
+@media (max-width: 767px) {
+    .user-card .MuiTypography-root {
+        font-size: 50%;
     }
 }
