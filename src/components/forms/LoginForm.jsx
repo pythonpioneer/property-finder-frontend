@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import '../../App.css';
-import { registerUser } from '../../services/user';
 import LoggingUser from '../loader/LoggingUser';
 
 
-export default function RegistrationForm() {
+export default function LoginForm() {
 
     // to store the form data
-    const nameRef = useRef(null);
     const emailRef = useRef(null);
-    const contactRef = useRef(null);
     const passwordRef = useRef(null);
 
     // hooks to call actions and navigate
@@ -25,24 +22,10 @@ export default function RegistrationForm() {
         e.preventDefault();
 
         const formData = {
-            name: nameRef.current.value,
             email: emailRef.current.value,
-            contactNumber: contactRef.current.value,
             password: passwordRef.current.value,
         };
 
-        // now, submit the data and dispatch the action
-        dispatch(registerUser(formData))
-            .then(status => {
-
-                // if user created successfully
-                if (status.type === 'registerUser/fulfilled') {
-                    setTimeout(() => {
-                        navigate('/login');
-                    }, 0);
-                }
-            })
-            .catch();
     }
 
     return (
@@ -50,27 +33,21 @@ export default function RegistrationForm() {
             <div className="row justify-content-center align-items-center">
                 <div className="col-md-4">
 
-                    <div className="card card-design">
+                    <div className="card card-design login-card" style={{ marginTop: '160px' }}>
                         <div className="card-body">
-                            <h5 className="card-title text-center mb-4 font-weight-bold">Registration Form</h5>
+                            <h5 className="card-title text-center mb-4 font-weight-bold" >Login Form</h5>
 
                             <form onSubmit={handleFormSubmit}>
-                                <div className="mb-3">
-                                    <input ref={nameRef} id="form-input" type="text" className="form-control form-input" placeholder="Full Name" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black', color: 'black' }} />
-                                </div>
                                 <div className="mb-3">
                                     <input ref={emailRef} type="email" className="form-control" placeholder="Email" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black', color: 'black' }} />
                                 </div>
                                 <div className="mb-3">
-                                    <input ref={contactRef} type="tel" className="form-control" placeholder="Contact Number" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black', color: 'black' }} />
-                                </div>
-                                <div className="mb-3">
                                     <input ref={passwordRef} type="password" className="form-control" placeholder="Password" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black', color: 'black' }} />
                                 </div>
-                                <button type="submit" className="btn btn-primary w-100">Register</button>
+                                <button type="submit" className="btn btn-primary w-100">Login</button>
                             </form>
 
-                            {isLoading ? <LoggingUser /> : <p className="text-center mt-3">Already have an account? <Link to="/login">Login</Link></p>}
+                            {isLoading ? <LoggingUser /> : <p className="text-center mt-3">Don't have an account? <Link to="/register">Register</Link></p>}
                         </div>
                     </div>
 

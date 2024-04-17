@@ -27,17 +27,20 @@
 input {
     border-bottom: 1px solid black;
 }
-@media (min-width: 320px) and (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 766px) {
     .card-design {
         width: 290px;
         margin: 0 auto;
         margin-top: 80px;
     }
+    .login-card {
+        margin-top: 150px;
+    }
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 766px) and (max-width: 1024px) {
     .col-md-4 {
-        margin-left: auto; /* Move the column to the right */
-        margin-right: 30%; /* Add some space from the right side */
+        margin-left: 20%;
+        margin-right: 30%; 
     }
     .card-design {
         width: 330px;
@@ -51,5 +54,8 @@ input {
         width: 330px;
         margin: 0 auto;
         margin-top: 90px;
+    }
+    .login-card {
+        margin-top: 150px;
     }
 }

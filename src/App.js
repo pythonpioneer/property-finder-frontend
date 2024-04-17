@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import RegistrationForm from './components/forms/RegistrationForm';
 import Navbar from './components/header/Navbar';
 import Box from './components/body/Box';
+import LoginForm from './components/forms/LoginForm';
 
 function App() {
 	return (
@@ -11,6 +12,7 @@ function App() {
 			<Routes>
 				<Route exact path="/" element={ <Box /> } />
 				<Route exact path="/register" element={ <RegistrationForm /> } />
+				<Route exact path="/login" element={ <LoginForm /> } />
 			</Routes>
 			
 		</>

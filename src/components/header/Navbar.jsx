@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function Navbar() {
@@ -9,9 +10,9 @@ export default function Navbar() {
 				<a className="navbar-brand" href="/" style={{ fontSize: "30px", color: '#fcee9b' }}>
 					Impactmindz
 				</a>
-				<a className="navbar-brand" id="navbar-login" href="/" style={{ fontSize: "15px", color: '#fcee9b' }}>
+				<Link className="navbar-brand" id="navbar-login" to="/register" style={{ fontSize: "15px", color: '#fcee9b' }}>
 					Login/Signup
-				</a>
+				</Link>
 			</nav>
 
 		</>
