@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -12,9 +13,10 @@ import store from './store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-			<ToastContainer
+		<BrowserRouter>
+			<Provider store={store}>
+				<App />
+				<ToastContainer
 					role="alert"
 					position="bottom-right"
 					autoClose={1300}
@@ -26,7 +28,8 @@ root.render(
 					draggable
 					toastClassName={'toast-color'}
 				/>
-		</Provider>
+			</Provider>
+		</BrowserRouter>
 	</React.StrictMode>
 );
 

@@ -15,7 +15,7 @@ export default function RegistrationForm() {
     const passwordRef = useRef(null);
 
     // hooks to call actions and navigate
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isLoading } = useSelector(state => state.user);
 
@@ -37,7 +37,7 @@ export default function RegistrationForm() {
                 // if user created successfully
                 if (status.type === 'registerUser/fulfilled') {
                     setTimeout(() => {
-                        // navigate('/');
+                        navigate('/login');
                     }, 0);
                 }
             })
