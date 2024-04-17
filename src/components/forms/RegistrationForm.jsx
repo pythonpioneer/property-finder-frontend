@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../../App.css';
 
 
 export default function RegistrationForm() {
+
+    // to store the form data
+    const nameRef = useRef(null);
+    const emailRef = useRef(null);
+    const contactRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    // to handle the form
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(nameRef.current.value)
+    }
+
     return (
         <div className="container">
             <div className="row justify-content-center align-items-center">
@@ -12,18 +25,18 @@ export default function RegistrationForm() {
                         <div className="card-body">
                             <h5 className="card-title text-center mb-4 font-weight-bold">Registration Form</h5>
                             
-                            <form>
+                            <form onSubmit={handleFormSubmit}>
                                 <div className="mb-3">
-                                    <input id="form-input" type="text" className="form-control form-input" placeholder="Full Name" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
+                                    <input ref={nameRef} id="form-input" type="text" className="form-control form-input" placeholder="Full Name" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
                                 </div>
                                 <div className="mb-3">
-                                    <input type="email" className="form-control" placeholder="Email" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
+                                    <input ref={emailRef} type="email" className="form-control" placeholder="Email" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
                                 </div>
                                 <div className="mb-3">
-                                    <input type="tel" className="form-control" placeholder="Contact Number" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
+                                    <input ref={contactRef} type="tel" className="form-control" placeholder="Contact Number" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
                                 </div>
                                 <div className="mb-3">
-                                    <input type="password" className="form-control" placeholder="Password" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
+                                    <input ref={passwordRef} type="password" className="form-control" placeholder="Password" autoComplete="off" required style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', resize: 'none', boxShadow: 'none', borderBottom: '1px solid black' }} />
                                 </div>
                                 <button type="submit" className="btn btn-primary w-100">Register</button>
                             </form>

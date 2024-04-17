@@ -21,6 +21,9 @@
     border: 3px solid black;
     box-shadow: 3px 12px 3px rgba(0, 0, 0, 0.8);
 }
+.card-body {
+    border-radius: 5%;
+}
 input {
     border-bottom: 1px solid black;
 }
@@ -33,16 +36,15 @@ input {
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     .col-md-4 {
-      margin-left: auto; /* Move the column to the right */
-      margin-right: 30%; /* Add some space from the right side */
+        margin-left: auto; /* Move the column to the right */
+        margin-right: 30%; /* Add some space from the right side */
     }
     .card-design {
         width: 330px;
         margin: 0 auto;
         margin-top: 90px;
     }
-  }
-  
+}
 
 @media (min-width: 1025px) {
     .card-design {
