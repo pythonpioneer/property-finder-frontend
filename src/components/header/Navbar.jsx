@@ -20,16 +20,16 @@ export default function Navbar() {
 		<>
 			{/* Image and text */}
 			<nav className="navbar navbar-bg-color" style={{ padding: "0", paddingLeft: "5%", paddingRight: "4%" }}>
-				<a className="navbar-brand" href="/" style={{ fontSize: "30px", color: '#fcee9b' }}>
+				<Link className="navbar-brand" to="/" style={{ fontSize: "30px", color: '#fcee9b' }}>
 					Impactmindz
-				</a>
+				</Link>
 
 				{/* to login and log out the users */}
 				{isLoggedIn
 				? <div onClick={handleLogout} className="navbar-brand" id="navbar-logout"  style={{ fontSize: "15px", color: '#fcee9b' }}>
 					Logout
 				</div>
-				: <Link className="navbar-brand" id="navbar-login" to="/register" style={{ fontSize: "15px", color: '#fcee9b' }}>
+				: <Link className="navbar-brand" id="navbar-login" to="/login" style={{ fontSize: "15px", color: '#fcee9b' }}>
 					Login/Signup
 				</Link>}
 			</nav>
