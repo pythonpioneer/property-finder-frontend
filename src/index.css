@@ -25,4 +25,8 @@ textarea:focus, input:focus, input, textarea {
   resize: none;
 }
 
+i:hover {
+  cursor: pointer;
+}
+
 

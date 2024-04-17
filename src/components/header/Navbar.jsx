@@ -24,14 +24,21 @@ export default function Navbar() {
 					Impactmindz
 				</Link>
 
-				{/* to login and log out the users */}
-				{isLoggedIn
-				? <div onClick={handleLogout} className="navbar-brand" id="navbar-logout"  style={{ fontSize: "15px", color: '#fcee9b' }}>
-					Logout
+				<div style={{ display: 'flex', backgroundColor: 'transparent' }}>
+
+					{/* to login and log out the users */}
+					{isLoggedIn
+						? <div onClick={handleLogout} className="navbar-brand" id="navbar-logout" style={{ fontSize: "15px", color: '#fcee9b' }}>
+							Logout
+						</div>
+						: <Link className="navbar-brand" id="navbar-login" to="/login" style={{ fontSize: "15px", color: '#fcee9b' }}>
+							Login/Signup
+						</Link>
+					}
+					<Link to='/user'>
+						<i className="fa-solid fa-user sa" style={{ fontSize: '28px', backgroundColor: 'transparent', marginRight: '12px', color: '#b9b9b9' }}></i>
+					</Link>
 				</div>
-				: <Link className="navbar-brand" id="navbar-login" to="/login" style={{ fontSize: "15px", color: '#fcee9b' }}>
-					Login/Signup
-				</Link>}
 			</nav>
 
 		</>
