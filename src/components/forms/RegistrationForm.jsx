@@ -5,7 +5,7 @@ import '../../App.css';
 export default function RegistrationForm() {
     return (
         <div className="container">
-            <div className="row justify-content-center align-items-center" style={{ marginTop: "120px" }}>
+            <div className="row justify-content-center align-items-center">
                 <div className="col-md-4">
 
                     <div className="card card-design">

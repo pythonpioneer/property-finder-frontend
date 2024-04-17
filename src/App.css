@@ -24,3 +24,30 @@
 input {
     border-bottom: 1px solid black;
 }
+@media (min-width: 320px) and (max-width: 768px) {
+    .card-design {
+        width: 290px;
+        margin: 0 auto;
+        margin-top: 80px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .col-md-4 {
+      margin-left: auto; /* Move the column to the right */
+      margin-right: 30%; /* Add some space from the right side */
+    }
+    .card-design {
+        width: 330px;
+        margin: 0 auto;
+        margin-top: 90px;
+    }
+  }
+  
+
+@media (min-width: 1025px) {
+    .card-design {
+        width: 330px;
+        margin: 0 auto;
+        margin-top: 90px;
+    }
+}
