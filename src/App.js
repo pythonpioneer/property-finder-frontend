@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import RegistrationForm from './components/forms/RegistrationForm';
 import Navbar from './components/header/Navbar';
 import Box from './components/body/Box';
@@ -28,6 +28,8 @@ function App() {
 				<Route exact path="/register" element={ <RegistrationForm /> } />
 				<Route exact path="/login" element={ <LoginForm /> } />
 				<Route exact path="/user" element={ <UserDetails /> } />
+
+				{/* implement the update contact */}
 			</Routes>
 		</>
 	);

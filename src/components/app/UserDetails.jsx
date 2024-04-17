@@ -1,9 +1,26 @@
-import React from 'react';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchUserInfo } from '../../services/user';
 
 
 export default function UserDetails() {
+
+    // select the user details from the store
+    const { userInfo } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    // fetch the user details
+    useEffect(() => {
+        if (userInfo.name === "...") {
+
+            // then make the api call to fetch the user details
+            dispatch(fetchUserInfo());
+        }
+
+    }, [dispatch, userInfo.name])
+
+
     return (
         <>
             <div className="card user-card">
@@ -16,15 +33,15 @@ export default function UserDetails() {
 
                 <div className='d-flex' style={{ borderRadius: '0 0 27px 27px' }}>
                     <div className="card-body user-card-body ml-3">
-                        <h3 className="card-title">Hritik Kumar Sinha</h3>
-                        <p className="text-bold">Email: hrk@gmail.com</p>
-                        <p className="text-bold">Contact Number: 98765432109</p>
-                        <p className="text-bold">Role: Tenant</p>
-                        <a href="#" className="btn btn-primary">Update Informations</a>
+                        <h3 className="card-title">{userInfo.name}</h3>
+                        <p className="text-bold">Email: {userInfo.email}</p>
+                        <p className="text-bold">Contact Number: {userInfo.contactNumber}</p>
+                        <p className="text-bold">Role: {userInfo.userType}</p>
+                        <a href="/update" className="btn btn-primary">Update Informations</a>
                     </div>
                     <div className='mr-5 mt-4 text-bold'>
-                        <p>User Joined: Wed 17 Apr 8:25 PM</p>
-                        <p>User Joined: Wed 17 Apr 8:25 PM</p>
+                        <p>&nbsp;&nbsp;User Joined: {userInfo.createdAt}</p>
+                        <p>Last Updated: {userInfo.updatedAt}</p>
                     </div>
                 </div>
             </div>

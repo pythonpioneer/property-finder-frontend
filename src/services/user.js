@@ -52,5 +52,23 @@ const signInUser = createAsyncThunk('signInUser', async (formData) => {
         });
 });
 
+// to fetch the details of logged in user
+const fetchUserInfo = createAsyncThunk('fetchUserInfo', async (req, res) => {
 
-export { registerUser, signInUser };
+    // fetch the auth token from local storage
+    const token = localStorage.getItem('auth-token');
+
+    // now, make the api call to fetch the logged in user
+    return axios.get(`${URL}${APIPATH}user/`, {
+        headers: {
+            "auth-token": token,
+        },
+    })
+        .then(response => response.data)
+        .catch(err => {  // if we encounter any errors
+            throw err;
+        });
+})
+
+
+export { registerUser, signInUser, fetchUserInfo };

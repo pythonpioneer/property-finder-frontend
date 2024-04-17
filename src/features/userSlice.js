@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser, signInUser } from "../services/user";
+import { fetchUserInfo, registerUser, signInUser } from "../services/user";
 import { toast } from "react-toastify";
+import { formatDateTime } from "../utils";
 
 
 // initial global state of the application
@@ -8,6 +9,17 @@ const initialState = {
     isLoggedIn: false,
     isLoading: false,
     hasErrors: false,
+
+    // to store user's information
+    userInfo: {
+        email: "...",
+        contactNumber: "...",
+        name: "...",
+        userType: "...",
+        createdAt: "...",
+        updatedAt: "...",
+        _id: null
+    }
 }
 
 // now create the user slice
@@ -61,6 +73,27 @@ const userSlice = createSlice({
             .addCase(signInUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.hasErrors = true;
+            })
+
+            // to fetch the logged in user details
+            .addCase(fetchUserInfo.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchUserInfo.fulfilled, (state, action) => { 
+                state.isLoading = false;
+                state.hasErrors = false;
+                
+                // set the user details
+                state.userInfo = action.payload.user;
+
+                // set the formatted user text
+                state.userInfo.updatedAt = formatDateTime(action.payload.user.updatedAt);
+                state.userInfo.createdAt = formatDateTime(action.payload.user.createdAt);
+            })
+            .addCase(fetchUserInfo.rejected, (state, action) => {
+                state.isLoading = false;
+                state.hasErrors = true;
+                toast.error(action.payload || "User is not Logged In");
             })
     }
 });
