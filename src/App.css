@@ -106,23 +106,56 @@ input {
 }
 .header-text-head,
 .header-text:hover:hover {
-    font-size: 19px;
     font-weight: bold;
-    pointer-events: none;
 }
-.active-menu {
+.active-menu:hover {
     color: #fcee9b;
     font-weight: bold;
-    font-size: 18px;
-    text-transform: uppercase;
+    border: 2px solid gray;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    background-color: #b2b2b2;
 }
 
 .smaller-font {
     font-size: 16px; /* Adjust the font size as needed */
     margin-right: 10px; /* Add spacing between navigation links */
-    pointer-events: none; 
     font-weight: 600;
 }
 .nav-item.nav-link:hover {
     font-size: inherit; /* Reset font size on hover */
 }
+
+/* Dropdown container */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: red;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+    z-index: 999;
+}
+
+/* Show dropdown content on hover */
+.active-menu:hover .dropdown-content {
+    display: block;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change background color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: transparent;
+}
+
