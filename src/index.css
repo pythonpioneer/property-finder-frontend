@@ -1,31 +1,32 @@
 * {
-  background-color: #b2b2b2;
-  margin: 0;
-  padding: 0;
+    background-color: #b2b2b2;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: 'georgia', 'optima', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: "georgia", "optima", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
-textarea:focus, input:focus, input, textarea {
-  background-color:transparent;
-  outline: none !important;
-  border: none;
-  resize: none;
+textarea:focus,
+input:focus,
+input,
+textarea {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    resize: none;
 }
 
 i:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
-

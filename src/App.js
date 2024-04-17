@@ -10,6 +10,7 @@ import { loginUser } from './features/userSlice';
 import UserDetails from './components/app/UserDetails';
 import UpdationForm from './components/forms/UpdateForm';
 import FilterNavbar from './components/header/FilterNavbar';
+import AddPropertyForm from './components/forms/AddPropertyForm';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
 				<Route exact path="/login" element={ <LoginForm /> } />
 				<Route exact path="/user" element={ <UserDetails /> } />
 				<Route exact path="/update" element={ <UpdationForm /> } />
+				<Route exact path="/add-property" element={ <AddPropertyForm /> } />
 			</Routes>
 		</>
 	);
