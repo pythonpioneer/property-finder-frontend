@@ -37,7 +37,7 @@ export default function UserDetails() {
                         <p className="text-bold">Email: {userInfo.email}</p>
                         <p className="text-bold">Contact Number: {userInfo.contactNumber}</p>
                         <p className="text-bold">Role: {userInfo.userType}</p>
-                        <a href="/update" className="btn btn-primary">Update Informations</a>
+                        <Link to="/update" className="btn btn-primary">Update Informations</Link>
                     </div>
                     <div className='mr-5 mt-4 text-bold'>
                         <p>&nbsp;&nbsp;User Joined: {userInfo.createdAt}</p>

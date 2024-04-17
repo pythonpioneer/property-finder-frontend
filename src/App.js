@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from './features/userSlice';
 import UserDetails from './components/app/UserDetails';
+import UpdationForm from './components/forms/UpdateForm';
 
 
 function App() {
@@ -28,8 +29,7 @@ function App() {
 				<Route exact path="/register" element={ <RegistrationForm /> } />
 				<Route exact path="/login" element={ <LoginForm /> } />
 				<Route exact path="/user" element={ <UserDetails /> } />
-
-				{/* implement the update contact */}
+				<Route exact path="/update" element={ <UpdationForm /> } />
 			</Routes>
 		</>
 	);
