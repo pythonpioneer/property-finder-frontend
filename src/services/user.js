@@ -85,7 +85,7 @@ const updateContact = createAsyncThunk('updateContact', async (formData) => {
                 "auth-token": token,
             },
         })
-        .then(response => {  // user logged in successfully
+        .then(response => {  // user updated in successfully
             toast.success(response?.data?.message || "Logged in!!"); 
             return response.data;
         })
@@ -95,5 +95,31 @@ const updateContact = createAsyncThunk('updateContact', async (formData) => {
         });
 });
 
+// to update the user type
+const updateUserType = createAsyncThunk('updateUserType', async (formData) => {
 
-export { registerUser, signInUser, fetchUserInfo, updateContact };
+    // fetch the auth token from local storage
+    const token = localStorage.getItem('auth-token');
+
+    // now, make the api call to update user's contact
+    return axios.patch(`${URL}${APIPATH}user/type`,
+        JSON.stringify(formData),
+        {
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": token,
+            },
+        })
+        .then(response => {  // user updated in successfully
+            toast.success(response?.data?.message || "Logged in!!"); 
+            return response.data;
+        })
+        .catch(err => {  // to handle errors
+            toast.error(err?.response?.data?.message || "Failed!!");
+            throw err;
+        });
+
+})
+
+
+export { registerUser, signInUser, fetchUserInfo, updateContact, updateUserType };

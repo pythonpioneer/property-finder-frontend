@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserInfo, registerUser, signInUser, updateContact } from "../services/user";
+import { fetchUserInfo, registerUser, signInUser, updateContact, updateUserType } from "../services/user";
 import { toast } from "react-toastify";
 import { formatDateTime } from "../utils";
 
@@ -112,6 +112,25 @@ const userSlice = createSlice({
                 state.userInfo.createdAt = formatDateTime(action.payload.user.createdAt);
             })
             .addCase(updateContact.rejected, (state, action) => {
+                state.isLoading = false;
+                state.hasErrors = true;
+            })
+
+            // to update the logged in user details
+            .addCase(updateUserType.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateUserType.fulfilled, (state, action) => { 
+                state.isLoading = false;
+                state.hasErrors = false;
+
+                // update the user role
+                state.userInfo.userType = action.payload.user.userType;
+
+                // set the formatted user text
+                state.userInfo.updatedAt = formatDateTime(action.payload.user.updatedAt);
+            })
+            .addCase(updateUserType.rejected, (state, action) => {
                 state.isLoading = false;
                 state.hasErrors = true;
             })

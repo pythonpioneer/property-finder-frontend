@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import '../../App.css';
-import { fetchUserInfo, updateContact } from '../../services/user';
+import { fetchUserInfo, updateContact, updateUserType } from '../../services/user';
 import LoggingUser from '../loader/LoggingUser';
 
 
@@ -27,6 +27,7 @@ export default function UpdationForm() {
 
         // push only updated data
         const formData = {};
+        let isUpdated = false;
 
         // check that how many fields updated
         if (nameRef.current.value !== userInfo.name) formData.name = nameRef.current.value;
@@ -35,17 +36,43 @@ export default function UpdationForm() {
 
         // if there is any fields to be updated
         if (Object.keys(formData).length) {
-            dispatch(updateContact(formData))
-            .then(status => {
 
-                // if user updated successfully
-                if (status.type === 'updateContact/fulfilled') {
-                    setTimeout(() => {
+            // contact updated
+            isUpdated = true;
+
+            // update teh contact of the user
+            dispatch(updateContact(formData))
+                .then(status => {
+
+                    // if user updated successfully
+                    if (status.type === 'updateContact/fulfilled') {
                         navigate('/user');
-                    }, 0);
-                }
-            });
+                    }
+                });
         }
+
+        // check that the user updated the user type field
+        const updatedUserType = tenantRef.current.checked ? 'tenant' : 'owner';
+
+        // if user updated
+        if (userInfo.userType !== updatedUserType) {
+            
+            // type updated
+            isUpdated = true;
+
+            // update the user type
+            dispatch(updateUserType({ userType: updatedUserType }))
+                .then(status => {
+
+                    // if user updated successfully
+                    if (status.type === 'updateUserType/fulfilled') {
+                        navigate('/user');
+                    }
+                });
+        }
+
+        // a message that there is nothing to update
+        !isUpdated && toast.info("Nothing to udpate");
     }
 
     // fetch the user details
