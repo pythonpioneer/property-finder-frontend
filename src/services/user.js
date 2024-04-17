@@ -12,8 +12,29 @@ const APIPATH = PATH;  // '/api/v1/'
 // to register the user
 const registerUser = createAsyncThunk('registerUser', async (formData) => {
 
-    // now, make the api call to login the user
+    // now, make the api call to register the user
     return axios.post(`${URL}${APIPATH}user/register`,
+        JSON.stringify(formData),
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then(response => {  // user logged in successfully
+            toast.success(response?.data?.message || "Logged in!!"); 
+            return;
+        })
+        .catch(err => {  // to handle errors
+            toast.error(err?.response?.data?.message || "Failed!!")
+            throw err;
+        });
+});
+
+// to register the user
+const signInUser = createAsyncThunk('signInUser', async (formData) => {
+
+    // now, make the api call to login the user
+    return axios.post(`${URL}${APIPATH}user/login`,
         JSON.stringify(formData),
         {
             headers: {
@@ -31,4 +52,5 @@ const registerUser = createAsyncThunk('registerUser', async (formData) => {
         });
 });
 
-export { registerUser };
+
+export { registerUser, signInUser };

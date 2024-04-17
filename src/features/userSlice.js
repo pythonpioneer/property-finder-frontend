@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser } from "../services/user";
+import { registerUser, signInUser } from "../services/user";
 
 
 // initial global state of the application
@@ -20,16 +20,29 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // to login the user
+            // to register the user
             .addCase(registerUser.pending, (state) => {  // during api calls
                 state.isLoading = true;
             })
-            .addCase(registerUser.fulfilled, (state, action) => {  // after successfull logged in 
+            .addCase(registerUser.fulfilled, (state, action) => {  // after successfull registration in 
                 state.isLoading = false;
                 state.hasErrors = false;
-                userSlice.caseReducers.loginUser(state, action);  // login the user
             })
-            .addCase(registerUser.rejected, (state, action) => {  // if logging in failed, handle error later
+            .addCase(registerUser.rejected, (state, action) => {  // if registration failed
+                state.isLoading = false;
+                state.hasErrors = true;
+            })
+
+            // to login the user
+            .addCase(signInUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(signInUser.fulfilled, (state, action) => { 
+                state.isLoading = false;
+                state.hasErrors = false;
+                userSlice.caseReducers.loginUser(state, action);
+            })
+            .addCase(signInUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.hasErrors = true;
             })

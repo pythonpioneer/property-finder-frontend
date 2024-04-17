@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import '../../App.css';
+import { signInUser } from '../../services/user';
 import LoggingUser from '../loader/LoggingUser';
 
 
@@ -25,6 +26,19 @@ export default function LoginForm() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         };
+
+        // dispatch the signin action
+        dispatch(signInUser(formData))
+            .then(status => {
+
+                // if user logged in successfully
+                if (status.type === 'signInUser/fulfilled') {
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 0);
+                }
+            })
+            .catch();
 
     }
 
