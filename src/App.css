@@ -7,6 +7,16 @@
     border-radius: 20px;
     color: #a08908;
 }
+#navbar-logout {
+    padding: 5px 10px;
+    font-weight: 600;
+    background-color: transparent;
+}
+#navbar-logout:hover {
+    background-color: rgb(160, 162, 164);
+    border-radius: 20px;
+    color: #a08908;
+}
 .navbar-bg-color {
     background-color: #af1a1a;
 }

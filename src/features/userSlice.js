@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, signInUser } from "../services/user";
+import { toast } from "react-toastify";
 
 
 // initial global state of the application
@@ -17,6 +18,21 @@ const userSlice = createSlice({
         loginUser: (state) => {  // if there is authentication token in the local storage then logged in the user
             state.isLoggedIn = Boolean(localStorage?.getItem('auth-token'));
         },
+        logoutUser: (state) => {
+            const isUserLoggedIn = Boolean(localStorage?.getItem('auth-token'));
+
+            if (isUserLoggedIn) {
+                toast.success("User Logged Out!")
+                state.isLoggedIn = false;
+
+                // remove the token from localStorage
+                localStorage.clear('auth-token');
+            }
+            else {
+                state.isLoggedIn = false;
+                toast.info("User Already Logged Out.");
+            }
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -51,5 +67,5 @@ const userSlice = createSlice({
 
 
 // now export the reducers and actions
-export const { loginUser } = userSlice.actions;
+export const { loginUser, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
