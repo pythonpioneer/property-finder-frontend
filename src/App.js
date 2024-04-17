@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from './features/userSlice';
 import UserDetails from './components/app/UserDetails';
 import UpdationForm from './components/forms/UpdateForm';
+import FilterNavbar from './components/header/FilterNavbar';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 	return (
 		<>
 			<Navbar />
+			<FilterNavbar />
 			<Routes>
 				<Route exact path="/" element={ <Box /> } />
 				<Route exact path="/register" element={ <RegistrationForm /> } />

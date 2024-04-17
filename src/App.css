@@ -24,7 +24,7 @@
     background-color: #b2b2b2;
 }
 #second-navbar {
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid gray;
 }
 .card-design {
     border-radius: 10%;
@@ -96,3 +96,33 @@ input {
     }
 }
 
+.header-text,
+.header-text:hover {
+    color: black;
+    padding: 2px 0px;
+    padding-right: 10px;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.header-text-head,
+.header-text:hover:hover {
+    font-size: 19px;
+    font-weight: bold;
+    pointer-events: none;
+}
+.active-menu {
+    color: #fcee9b;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.smaller-font {
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-right: 10px; /* Add spacing between navigation links */
+    pointer-events: none; 
+    font-weight: 600;
+}
+.nav-item.nav-link:hover {
+    font-size: inherit; /* Reset font size on hover */
+}
