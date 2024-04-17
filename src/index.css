@@ -2,7 +2,6 @@
   background-color: #b2b2b2;
   margin: 0;
   padding: 0;
-  color: #fcee9b;
 }
 
 body {
@@ -18,3 +17,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+textarea:focus, input:focus, input, textarea {
+  background-color:transparent;
+  outline: none !important;
+  border: none;
+  resize: none;
+}
+
+

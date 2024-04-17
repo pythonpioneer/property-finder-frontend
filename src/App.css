@@ -16,3 +16,11 @@
 #second-navbar {
     border-bottom: 1px solid gray;
 }
+.card-design {
+    border-radius: 10%;
+    border: 3px solid black;
+    box-shadow: 3px 12px 3px rgba(0, 0, 0, 0.8);
+}
+input {
+    border-bottom: 1px solid black;
+}
