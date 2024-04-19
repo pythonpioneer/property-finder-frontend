@@ -1,4 +1,8 @@
 import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { addProperty } from "../../services/property";
 
 
 const PropertyForm = () => {
@@ -29,6 +33,12 @@ const PropertyForm = () => {
         setArea(event.target.value);
     };
 
+    const [image, setImage] = useState(null);
+
+    const handleImage = (e) => {
+        setImage(e.target.files[0]);
+    }
+
     // to store all the values
     const stateRef = useRef(null);
     const cityRef = useRef(null);
@@ -45,17 +55,60 @@ const PropertyForm = () => {
 
     const imageRef = useRef(null);
     const descRef = useRef(null);
-    const propertyTypeRef = useRef(null);
-    const tenantRef = useRef(null);
-    const furnishingRef = useRef(null);
     const areaRef = useRef(null);
+
     const flooringRef = useRef(null);
     const ageRef = useRef(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     // to handle the form submission
     const handleSubmit = () => {
-        console.log(furnishingType)
+
+        try {
+            // fetching data from form
+            const formData = {
+                desc: descRef.current.value,
+                price: {
+                    monthlyRent: rentRef.current.value,
+                    brokerage: brokerageRef.current.value,
+                    security: securityRef.current.value,
+                    maintainanceCost: maintainanceRef?.current?.value,
+                },
+                propertyType: propertyType[0] + " bhk",
+                furnishing: furnishingType,
+                preferredTenant,
+                area: areaRef.current.value,
+                location: {
+                    "state": stateRef.current.value,
+                    "city": cityRef.current.value,
+                    "district": districtRef.current.value,
+                    "sector": sectorRef.current.value,
+                    "zip": zipRef.current.value,
+                },
+                flooring: flooringRef.current.value,
+                propertyAge: ageRef.current.value,
+                image,
+            };
+            
+            console.log(formData)
+            // call the action and submit the data
+            dispatch(addProperty(formData))
+                .then(status => {
+                    if (status.type === 'addProperty/fulfilled')
+                        navigate('/');
+                })
+                .catch(() => {
+                    toast.error("Some Fields are missing");
+                })
+
+
+        } catch (error) {
+            toast.error("Some Fields are missing");
+        }
+
     }
 
 
@@ -112,18 +165,18 @@ const PropertyForm = () => {
                             </div>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <input ref={rentRef} type="text" className="form-control" placeholder="Monthly Rent"/>
+                                    <input ref={rentRef} type="number" className="form-control" placeholder="Monthly Rent" />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <input ref={maintainanceRef} type="text" className="form-control" placeholder="maintainance" />
+                                    <input ref={maintainanceRef} type="number" className="form-control" placeholder="maintainance" />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <input ref={securityRef}type="text" className="form-control" placeholder="Security Charge" />
+                                    <input ref={securityRef} type="number" className="form-control" placeholder="Security Charge" />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <input ref={brokerageRef} type="text" className="form-control" placeholder="Brokerage" />
+                                    <input ref={brokerageRef} type="number" className="form-control" placeholder="Brokerage" />
                                 </div>
                             </div>
 
@@ -141,21 +194,35 @@ const PropertyForm = () => {
 
                             <div className="row">
                                 <div className="col">
+                                    <h4>Other Informations</h4>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <input ref={ageRef} type="text" className="form-control" placeholder="Property Age" />
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <input ref={flooringRef} type="text" className="form-control" placeholder="Flooring. Example: wooden" />
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col">
                                     <h6>Property Type</h6>
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name="propertyType" id="1bhk" value="1bhk" checked={propertyType === "1bhk"} onChange={handlePropertyTypeChange} />
+                                        <input className="form-check-input" type="radio" name="propertyType" id="1 bhk" value="1 bhk" checked={propertyType === "1 bhk"} onChange={handlePropertyTypeChange} />
                                         <label className="form-check-label" htmlFor="1bhk">
                                             1 BHK
                                         </label>
                                     </div>
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name="propertyType" id="2bhk" value="2bhk" checked={propertyType === "2bhk"} onChange={handlePropertyTypeChange} />
+                                        <input className="form-check-input" type="radio" name="propertyType" id="2 bhk" value="2 bhk" checked={propertyType === "2 bhk"} onChange={handlePropertyTypeChange} />
                                         <label className="form-check-label" htmlFor="2bhk">
                                             2 BHK
                                         </label>
                                     </div>
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name="propertyType" id="3bhk" value="3bhk" checked={propertyType === "3bhk"} onChange={handlePropertyTypeChange} />
+                                        <input className="form-check-input" type="radio" name="propertyType" id="3 bhk" value="3 bhk" checked={propertyType === "3 bhk"} onChange={handlePropertyTypeChange} />
                                         <label className="form-check-label" htmlFor="3bhk">
                                             3 BHK
                                         </label>
@@ -268,12 +335,12 @@ const PropertyForm = () => {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="input-group mb-3">
-                                        <input ref={areaRef} type="number" className="form-control" placeholder="Area" aria-label="Area" aria-describedby="area-addon"/>
+                                        <input ref={areaRef} type="number" className="form-control" placeholder="Area" aria-label="Area" aria-describedby="area-addon" />
                                         <span className="input-group-text" id="area-addon">sqft.</span>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <input ref={imageRef} type="file" className="mt-1" style={{ border: 'none' }} />
+                                    <input ref={imageRef} type="file" className="mt-1" style={{ border: 'none' }} onChange={handleImage} />
                                 </div>
                             </div>
 
