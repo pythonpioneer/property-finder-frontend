@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Property Finder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Property Finder Frontend
 
-## Available Scripts
+The frontend of the Property Finder project offers a user-friendly interface packed with essential features for seamless property browsing and interaction. Users can effortlessly log in, sign up, and log out, ensuring smooth access to their accounts. The platform enables users to explore property listings, view detailed property information, and like their preferred properties for future reference. With intuitive search and filtering options, users can easily narrow down their choices based on specific criteria. Additionally, the frontend allows users to upload their properties, contributing to the growing database of listings. 
 
-In the project directory, you can run:
+```
+Here is a dummy login user login information
 
-### `npm start`
+email: hrk@gmail.com
+password: hrk123
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### BackEnd Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Clone the backend repo
 
-### `npm test`
+      https://github.com/pythonpioneer/property-finder-backend.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Go to your project folder and install dependencies (make sure you have npm and node)
 
-### `npm run build`
+  ```
+  cd property-finder-backend
+  ```
+  ```
+  npm install
+  ```
+- Create a `.env` file at root directory (same as `.env.sample`)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   Copy this data and paste it in `.env`
+  
+  ```
+  MONGODB_URI=mongodb+srv://pythonpioneer:DU02ug4xveJ8eX1S@todo-app.mwl8uow.mongodb.net/Property?retryWrites=true&w=majority
+  SIGNATURE=thisisauniquesignaturelmao
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  CLOUDINARY_CLOUD_NAME=hrk
+  CLOUDINARY_API_KEY=331295534557971
+  CLOUDINARY_API_SECRET=OuBuneJz0Xl4fZL86dP77Yo6jNA
+  ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- After installation, To start the app
 
-### `npm run eject`
+      npm run dev
+  **Note:** If the app didn't run with the given command then please explore nodemon for your machine.
+  
+- It will run on 4000
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  To verify the port run this command on your browser
+  
+      http://localhost:4000/api/v1/health
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Frontend Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Clone the frontend repo
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+      https://github.com/pythonpioneer/property-finder-frontend.git
 
-## Learn More
+- Go to your project folder and install dependencies (make sure you have npm and node)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  ```
+  cd property-finder-frontend
+  ```
+  ```
+  npm install
+  ```
+  
+- Create a `.env` file at root directory (same as `.env.sample`)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   Copy this data and paste it in `.env`
+  
+  ```
+  REACT_APP_URL=http://localhost:4000
+  ```
 
-### Code Splitting
+- After installation, To start the app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+      npm start
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- It will run on port 3000
+  
+  
