@@ -7,13 +7,32 @@ import { setSearch } from '../../features/propertySlice';
 export default function FilterNavbar() {
 
     // to store the search value
+    const dispatch = useDispatch();
     const searchRef = useRef(null);
-    const dispatch = useDispatch()
+    const propertyTypeRef = useRef(null);
+    const preferredTenantRef = useRef(null);
+    const minPriceRef = useRef(null);
+    const maxPriceRef = useRef(null);
+    const sectorRef = useRef(null);
+    const cityRef = useRef(null);
 
     // to handle search functionality
     const handleSearch = () => {
         dispatch(setSearch(searchRef.current.value));
     }
+
+    // to handle all the filters
+    const handleFilters = () => {
+        const filters = {
+            minPrice: minPriceRef.current.value,
+            maxPrice: maxPriceRef.current.value,
+            sector: sectorRef.current.value,
+            cityRef: cityRef.current.value,
+        }
+
+        console.log({filters})
+    }
+
 
     return (
         <nav className="navbar navbar-expand-lg sticky-top" id="second-navbar" style={{ padding: '0', paddingLeft: '5%', paddingRight: '5%' }}>
@@ -63,29 +82,29 @@ export default function FilterNavbar() {
                                         <label htmlFor="priceRange"><strong>Price Range:</strong></label>
                                         <br />
                                         <div className="mb-3">
-                                            <input type="number" className="form-control mb-2" placeholder="min" />
+                                            <input ref={minPriceRef} type="number" className="form-control mb-2" placeholder="min" />
                                             <span> to </span>
-                                            <input type="number" className="form-control mb-2" placeholder="max" />
+                                            <input ref={maxPriceRef} type="number" className="form-control mb-2" placeholder="max" />
                                         </div>
                                     </div>
                                     <div style={{ flex: 1 }}>
                                         <label htmlFor="location">Location:</label>
                                         <br />
                                         <div className="mb-3">
-                                            <input type="text" className="form-control mb-2" placeholder="Sector" />
+                                            <input ref={sectorRef} type="text" className="form-control mb-2" placeholder="Sector" />
                                             <span> to </span>
-                                            <input type="text" className="form-control mb-2" placeholder="City" />
+                                            <input ref={cityRef} type="text" className="form-control mb-2" placeholder="City" />
                                         </div>
                                     </div>
                                     <div style={{ flex: 1 }}>
-                                        <button className="btn btn-primary" onClick={handleSearch}>Apply Filters</button>
+                                        <button className="btn btn-primary" onClick={handleFilters}>Apply Filters</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <input type="text" ref={searchRef} style={{ width: '130px', backgroundColor: '#8f8f8f', marginRight: '20px', borderRadius: '20px', padding: '1px', paddingLeft: '10px', boxShadow: '1px 1px #b2b2b2' }} />
+                        <input type="text" ref={searchRef} placeholder="Search Property" style={{ width: '130px', backgroundColor: '#8f8f8f', marginRight: '20px', borderRadius: '20px', padding: '1px', paddingLeft: '10px', boxShadow: '1px 1px #b2b2b2' }} />
                         <i className="fa-solid fa-magnifying-glass" onClick={handleSearch} style={{ fontSize: '18px' }}></i>
                     </div>
 
