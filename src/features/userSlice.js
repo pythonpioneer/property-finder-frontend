@@ -29,6 +29,7 @@ const userSlice = createSlice({
     reducers: {
         loginUser: (state) => {  // if there is authentication token in the local storage then logged in the user
             state.isLoggedIn = Boolean(localStorage?.getItem('auth-token'));
+            state.isLoggedIn = true;
         },
         logoutUser: (state) => {
             const isUserLoggedIn = Boolean(localStorage?.getItem('auth-token'));

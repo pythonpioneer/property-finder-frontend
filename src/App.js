@@ -1,11 +1,11 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom'; // Use Navigate from react-router-dom
 import RegistrationForm from './components/forms/RegistrationForm';
 import Navbar from './components/header/Navbar';
 import Box from './components/body/Box';
 import LoginForm from './components/forms/LoginForm';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from './features/userSlice';
 import UserDetails from './components/app/UserDetails';
 import UpdationForm from './components/forms/UpdateForm';
@@ -14,29 +14,33 @@ import AddPropertyForm from './components/forms/AddPropertyForm';
 
 
 function App() {
+    const dispatch = useDispatch();
+    const { isLoggedIn } = useSelector(state => state.user);
 
-	// to call the actions
-	const dispatch = useDispatch();
+    // Dispatch loginUser action on component mount to check login status
+    useEffect(() => {
+        dispatch(loginUser());
+    }, [dispatch]);
 
-	// to check that the user is loggedin or not, after page refresh
-	useEffect(() => {
-		dispatch(loginUser());
-	})
+    return (
+        <>
+            <Navbar />
+            <FilterNavbar />
+            <Routes>
+                {/* Allow access to all users */}
+                <Route exact path="/" element={<Box />} />
 
-	return (
-		<>
-			<Navbar />
-			<FilterNavbar />
-			<Routes>
-				<Route exact path="/" element={ <Box /> } />
-				<Route exact path="/register" element={ <RegistrationForm /> } />
-				<Route exact path="/login" element={ <LoginForm /> } />
-				<Route exact path="/user" element={ <UserDetails /> } />
-				<Route exact path="/update" element={ <UpdationForm /> } />
-				<Route exact path="/add-property" element={ <AddPropertyForm /> } />
-			</Routes>
-		</>
-	);
+                {/* Allow access to logged-out users only */}
+                <Route exact path="/register" element={!isLoggedIn ? <RegistrationForm /> : <Navigate to="/" />} />
+                <Route exact path="/login" element={!isLoggedIn ? <LoginForm /> : <Navigate to="/" />} />
+                
+                {/* Protect routes for logged-in users */}
+                <Route path="/user" element={isLoggedIn ? <UserDetails /> : <Navigate to="/login" />} />
+                <Route path="/update" element={isLoggedIn ? <UpdationForm /> : <Navigate to="/login" />} />
+                <Route path="/add-property" element={isLoggedIn ? <AddPropertyForm /> : <Navigate to="/login" />} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;
