@@ -268,7 +268,7 @@ const PropertyForm = () => {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="input-group mb-3">
-                                        <input ref={areaRef} type="text" className="form-control" placeholder="Area" aria-label="Area" aria-describedby="area-addon" value={area} onChange={handleAreaChange} ref={areaRef} />
+                                        <input ref={areaRef} type="number" className="form-control" placeholder="Area" aria-label="Area" aria-describedby="area-addon"/>
                                         <span className="input-group-text" id="area-addon">sqft.</span>
                                     </div>
                                 </div>
@@ -282,7 +282,6 @@ const PropertyForm = () => {
                                     <button type="button" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
