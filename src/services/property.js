@@ -40,8 +40,17 @@ const fetchAllProperty = createAsyncThunk('fetchAllProperty', async (filters) =>
 
     // construct filters
     const search = filters?.search?.trim()?.length > 0 ? filters?.search?.trim() : '';
+    let url = `${URL}${APIPATH}property/properties?search=${search}`;
 
-    return axios.get(`${URL}${APIPATH}property/properties?search=${search}`)
+    // Adding filters to the URL
+    if (filters.propertyType) url += `&propertyType=${filters.propertyType}`;
+    if (filters.preferredTenant.length) url += `&preferredTenant=${filters.preferredTenant.join(',')}`;
+    if (filters.minPrice) url += `&minPrice=${filters.minPrice}`;
+    if (filters.maxPrice) url += `&maxPrice=${filters.maxPrice}`;
+    if (filters.sector) url += `&sector=${filters.sector}`;
+    if (filters.city) url += `&city=${filters.city}`;
+
+    return axios.get(url)
         .then(response => {
             return response.data;
         })
@@ -100,31 +109,6 @@ const fetchLikedProperty = createAsyncThunk('fetchLikedProperty', async () => {
             toast.error(err?.response?.data?.message || "Failed!!");
             throw err;
         });
-});
-
-// to like the property
-const likeProperty = createAsyncThunk('likeProperty', async (propertyId) => {
-
-    // fetch the auth token from local storage
-    const token = localStorage.getItem('auth-token');
-
-    // set the headers for the request
-    const config = {
-        headers: {
-            'auth-token': token,
-        },
-    };
-
-    // now, like the property
-    return axios.patch(`${URL}${APIPATH}user/${propertyId}/like`, {}, config)
-        .then(response => {
-            return response.data;
-        })
-        .catch(err => {  // to handle errors
-            toast.error(err?.response?.data?.message || "Failed!!");
-            throw err;
-        });
-
 });
 
 

@@ -1,11 +1,9 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setSearch } from '../../features/propertySlice';
-
+import { setFilters, setSearch } from '../../features/propertySlice';
 
 export default function FilterNavbar() {
-
     // to store the search value
     const dispatch = useDispatch();
     const searchRef = useRef(null);
@@ -23,16 +21,22 @@ export default function FilterNavbar() {
 
     // to handle all the filters
     const handleFilters = () => {
+        const propertyType = propertyTypeRef.current.querySelector('input[name="propertyType"]:checked').value;
+        const preferredTenantCheckboxes = preferredTenantRef.current.querySelectorAll('input[name="preferredTenant"]:checked');
+        const preferredTenantValues = Array.from(preferredTenantCheckboxes).map(checkbox => checkbox.value);
+
         const filters = {
+            propertyType: propertyType,
+            preferredTenant: preferredTenantValues,
             minPrice: minPriceRef.current.value,
             maxPrice: maxPriceRef.current.value,
             sector: sectorRef.current.value,
-            cityRef: cityRef.current.value,
+            city: cityRef.current.value,
+            search: searchRef.current.value,
         }
 
-        console.log({filters})
+        dispatch(setFilters(filters));
     }
-
 
     return (
         <nav className="navbar navbar-expand-lg sticky-top" id="second-navbar" style={{ padding: '0', paddingLeft: '5%', paddingRight: '5%' }}>
@@ -41,7 +45,6 @@ export default function FilterNavbar() {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup" style={{ margin: '0' }}>
                 <div className="navbar-nav d-flex justify-content-between w-100 mx-5 mt-2">
-
                     <div className="nav-item dropdown d-flex" style={{ position: 'relative' }}>
                         <div className="nav-item dropdown" style={{ position: 'relative' }}>
                             <span className="nav-link header-text smaller-font active-menu" to="#" id="propertyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,7 +64,7 @@ export default function FilterNavbar() {
                             </span>
                             <div className="dropdown-menu" aria-labelledby="propertyDropdown" style={{ width: '400px', backgroundColor: '#b2b2b2', position: '', top: '28px', left: '0px', zIndex: '99', borderWidth: '0px 2px 2px 2px', borderTop: '0px', borderRadius: '0 0 10px 10px' }}>
                                 <div className='p-3'>
-                                    <div style={{ flex: 1 }}>
+                                    <div ref={propertyTypeRef} style={{ flex: 1 }}>
                                         <label htmlFor="propertyType"><strong>Property Type:</strong></label>
                                         <br />
                                         <input type="radio" id="1bhk" name="propertyType" value="1bhk" /> <label htmlFor="1bhk">1 BHK</label>
@@ -69,7 +72,7 @@ export default function FilterNavbar() {
                                         <input type="radio" id="3bhk" name="propertyType" value="3bhk" /> <label htmlFor="3bhk">3 BHK</label>
                                         <input type="radio" id="4bhk" name="propertyType" value="4bhk" /> <label htmlFor="4bhk">4+ BHK</label>
                                     </div>
-                                    <div style={{ flex: 1 }}>
+                                    <div ref={preferredTenantRef} style={{ flex: 1 }}>
                                         <label htmlFor="preferredTenant"><strong>Preferred Tenant:</strong></label>
                                         <br />
                                         <input type="checkbox" id="boys" name="preferredTenant" value="boys" /> <label htmlFor="boys">Boys</label>

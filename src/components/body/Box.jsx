@@ -19,12 +19,11 @@ export default function Box(props) {
         }
         else if (props.type === 'liked') {
             dispatch(fetchLikedProperty(filters));
-            console.log("Xxx")
         }
         else {
             dispatch(fetchAllProperty(filters));
         }
-    }, [dispatch, props.type, filters.search]);
+    }, [dispatch, props.type, filters]);
 
     // display data from requested type
     let allProperties = props.type === 'my' ? myProperties : 
