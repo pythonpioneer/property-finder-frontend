@@ -27,7 +27,7 @@ const PropertyCard = ({ property }) => {
     }
 
     return (
-        <Card className={classes.card} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent', border: '1px solid black' }}>
+        <Card className={classes.card} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
             <CardMedia
                 component="img"
                 alt="Property Image"
