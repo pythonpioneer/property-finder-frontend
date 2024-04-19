@@ -33,7 +33,6 @@ function App() {
                 <Route exact path="/" element={<Box />} />
                 <Route exact path="/property-details" element={<PropertyDetails />} />
 
-
                 {/* Allow access to logged-out users only */}
                 <Route exact path="/register" element={!isLoggedIn ? <RegistrationForm /> : <Navigate to="/" />} />
                 <Route exact path="/login" element={!isLoggedIn ? <LoginForm /> : <Navigate to="/" />} />

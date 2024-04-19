@@ -1,5 +1,5 @@
 import { Grid, Paper } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from 'react-router-dom';
 
 
@@ -8,7 +8,15 @@ const PropertyDetails = () => {
     const location = useLocation();
     const property = location.state.property;
 
-    console.log(property);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const handleNextImage = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % property.images.length);
+    };
+
+    const handlePrevImage = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex - 1 + property.images.length) % property.images.length);
+    };
 
     return (
         <>
@@ -17,7 +25,13 @@ const PropertyDetails = () => {
                     <Paper>
                         <Grid container p={4}>
                             {/* Image of property will be added here */}
-                            <Grid item xs={12} md={5} sx={{ backgroundColor: "black", height: '400px' }}></Grid>
+                            <Grid item xs={12} md={5} sx={{ height: '400px', position: 'relative', overflow: 'hidden' }}>
+                                <img src={property.images[currentImageIndex]} alt="img" style={{ objectFit: 'cover', width: '100%', height: '90%' }} />
+                                <div className="d-flex justify-content-between mt-2">
+                                    <button className="px-3" onClick={handlePrevImage}>Previous</button>
+                                    <button className="px-4" onClick={handleNextImage}>Next</button>
+                                </div>
+                            </Grid>
 
                             {/* details of property are added here */}
                             <Grid item xs={12} md={7} p={2} sx={{ backgroundColor: "transparent" }}>
