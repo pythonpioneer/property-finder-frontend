@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { likeProperty } from '../../services/user';
@@ -15,25 +15,19 @@ const useStyles = makeStyles({
 const PropertyCard = ({ property }) => {
 
     const classes = useStyles();
-    const [like, setLike] = useState(false);
+    // const [, setLike] = useState(false);
     const dispatch = useDispatch();
     const { likedProperties } = useSelector(state => state.user);
 
     // to handle the like 
     const handleLike = () => {
 
-        // call the action to like
-        if(likedProperties?.indexOf(property._id) >= 0) {
-            setLike(false);
-        }
-        else setLike(true);
-        if (!likedProperties) setLike(false)
 
         dispatch(likeProperty(property?._id));
     }
 
     return (
-        <Card className={classes.card} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
+        <Card className={classes.card} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent', border: '1px solid black' }}>
             <CardMedia
                 component="img"
                 alt="Property Image"
