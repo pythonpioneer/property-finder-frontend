@@ -1,10 +1,21 @@
 import React from 'react';
-import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core';
 
+
+const useStyles = makeStyles({
+    card: {
+        '@media (max-width: 600px)': {
+            width: '330px', // Adjust the width for smaller screens
+        },
+    }
+});
 
 const PropertyCard = ({ property }) => {
+
+    const classes = useStyles();
+
     return (
-        <Card style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
+        <Card className={classes.card} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
             <CardMedia
                 component="img"
                 alt="Property Image"
@@ -28,7 +39,7 @@ const PropertyCard = ({ property }) => {
                     <strong>Preferred Tenant:</strong> {property.preferredTenant[0].join(', ')}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Location:</strong> {property.location.district}, Sector {"property.location.sector"}
+                    <strong>Location:</strong> {property.location.district}, Sector {property.location.sector}
                 </Typography>
             </CardContent>
         </Card>
