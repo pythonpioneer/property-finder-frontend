@@ -67,7 +67,7 @@ const PropertyDetails = () => {
                                             <strong>Property Furnishing Status:</strong> {property.furnishing}-furnished
                                         </Grid>
                                         <Grid sx={{ backgroundColor: "transparent" }}>
-                                            <strong>Preferred Tenants:</strong> {property.preferredTenant.join(',' + " ")}
+                                            <strong>Preferred Tenants:</strong> {property.preferredTenant.join(',')}
                                         </Grid>
                                     </Grid>
                                 </Grid>
