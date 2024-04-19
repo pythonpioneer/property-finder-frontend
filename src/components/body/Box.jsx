@@ -9,26 +9,22 @@ export default function Box(props) {
 
     // to call the actions
     const dispatch = useDispatch();
-    const { properties, isLoading, myProperties } = useSelector(state => state.property);
+    const { properties, isLoading, myProperties, filters } = useSelector(state => state.property);
     const { likedProperties } = useSelector(state => state.user);
 
     useEffect(() => {
 
         if (props.type === 'my') {
-            if (myProperties?.length === 0) {
-                dispatch(fetchMyProperty());
-            }
+            dispatch(fetchMyProperty(filters));
         }
         else if (props.type === 'liked') {
-            dispatch(fetchLikedProperty());
+            dispatch(fetchLikedProperty(filters));
             console.log("Xxx")
         }
         else {
-            if (properties?.length === 0) {
-                dispatch(fetchAllProperty());
-            }
+            dispatch(fetchAllProperty(filters));
         }
-    }, [dispatch, props.type])
+    }, [dispatch, props.type, filters.search]);
 
     // display data from requested type
     let allProperties = props.type === 'my' ? myProperties : 

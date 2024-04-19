@@ -36,9 +36,12 @@ const addProperty = createAsyncThunk('addProperty', async (formData) => {
 });
 
 // to fetch all the property, login not required
-const fetchAllProperty = createAsyncThunk('fetchAllProperty', async () => {
+const fetchAllProperty = createAsyncThunk('fetchAllProperty', async (filters) => {
 
-    return axios.get(`${URL}${APIPATH}property/properties`)
+    // construct filters
+    const search = filters?.search?.trim()?.length > 0 ? filters?.search?.trim() : '';
+
+    return axios.get(`${URL}${APIPATH}property/properties?search=${search}`)
         .then(response => {
             return response.data;
         })
@@ -49,10 +52,13 @@ const fetchAllProperty = createAsyncThunk('fetchAllProperty', async () => {
 });
 
 // to fetch all the property, login not required
-const fetchMyProperty = createAsyncThunk('fetchMyProperty', async () => {
+const fetchMyProperty = createAsyncThunk('fetchMyProperty', async (filters) => {
 
     // fetch the auth token from local storage
     const token = localStorage.getItem('auth-token');
+
+    // construct filters
+    const search = filters?.search?.trim()?.length > 0 ? filters?.search?.trim() : '';
 
     // set the headers for the request
     const config = {
@@ -62,7 +68,7 @@ const fetchMyProperty = createAsyncThunk('fetchMyProperty', async () => {
         },
     };
 
-    return axios.get(`${URL}${APIPATH}user/properties`, config)
+    return axios.get(`${URL}${APIPATH}user/properties?search=${search}`, config)
         .then(response => {
             return response.data;
         })

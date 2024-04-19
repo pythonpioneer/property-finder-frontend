@@ -14,7 +14,9 @@ const initialState = {
     currPage: 2,
 
     // to handle search and filters
-    searchText: '',
+    filters: {
+        search: '',
+    }
 };
 
 // now, create the slice obj
@@ -35,6 +37,9 @@ const propertySlice = createSlice({
             // do not clear state.properties, it is not associated to any logged in user
             state.likedProperties = [];
             state.myProperties = [];
+        },
+        setSearch: (state, action) => {
+            state.filters.search = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -89,5 +94,5 @@ const propertySlice = createSlice({
 
 
 // now export the reducers and actions
-export const { setCurrPage, setTotalProperties, removeAllProperties, clearAllProperties } = propertySlice.actions;
+export const { setCurrPage, setTotalProperties, removeAllProperties, clearAllProperties, setSearch } = propertySlice.actions;
 export default propertySlice.reducer;
