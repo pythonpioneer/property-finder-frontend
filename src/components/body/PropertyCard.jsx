@@ -27,7 +27,7 @@ const PropertyCard = ({ property }) => {
 
     // to show the property details
     const handleClick = () => {
-        navigate('/property-details')
+        navigate('/property-details', { state: { property } });
     }
 
     return (

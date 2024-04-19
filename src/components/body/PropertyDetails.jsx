@@ -1,8 +1,15 @@
 import { Grid, Paper } from "@mui/material";
 import React from "react";
+import { useLocation } from 'react-router-dom';
 
 
 const PropertyDetails = () => {
+
+    const location = useLocation();
+    const property = location.state.property;
+
+    console.log(property);
+
     return (
         <>
             <Grid container mt={5} justifyContent={"center"}>
@@ -13,40 +20,44 @@ const PropertyDetails = () => {
                             <Grid item xs={12} md={5} sx={{ backgroundColor: "black", height: '400px' }}></Grid>
 
                             {/* details of property are added here */}
-
                             <Grid item xs={12} md={7} p={2} sx={{ backgroundColor: "transparent" }}>
                                 {/* first line */}
+
+                                <Grid
+                                    item
+                                    display={"flex"}
+                                    flexDirection={"column"}
+                                    justifyContent={"space-evenly"}
+                                    flexWrap={"wrap"}
+                                >
+                                    <Grid><strong>{property.desc}</strong></Grid>
+                                </Grid>
                                 <Grid item pb={3}>
-                                    {"prperty.type"} " " for rent in " "{"address.sector, city"}
+                                    {`${property.propertyType}, ${property.location?.sector ? 'Sector ' + property.location?.sector : ''}, ${property.location?.district}, ${property.location.state} ${property.location.zip}`}
                                 </Grid>
 
                                 {/* strip containing 3 items */}
                                 <Grid item
                                     sx={{
                                         padding: "10px",
-                                        backgroundColor: "#D4DFFF",
                                     }}
                                 >
                                     <Grid
                                         sx={{
                                             backgroundColor: "transparent",
-                                            display: "flex",
-                                            justifyContent: "space-between",
                                             rowGap: '6px',
                                             flexWrap: 'wrap'
                                         }}
                                     >
                                         <Grid sx={{ backgroundColor: "transparent" }}>
-                                            {"property.furnishing"}
+                                            <strong>Property Furnishing Status:</strong> {property.furnishing}-furnished
                                         </Grid>
                                         <Grid sx={{ backgroundColor: "transparent" }}>
-                                            {"property.num of baths"}
-                                        </Grid>
-                                        <Grid sx={{ backgroundColor: "transparent" }}>
-                                            {"property.preffered tenant"}
+                                            <strong>Preferred Tenants:</strong> {property.preferredTenant.join(',' + " ")}
                                         </Grid>
                                     </Grid>
                                 </Grid>
+
                                 {/* flex container showing remaining info of property */}
                                 <Grid
                                     item
@@ -66,8 +77,7 @@ const PropertyDetails = () => {
                                         justifyContent={"space-evenly"}
                                         flexWrap={"wrap"}
                                     >
-                                        <Grid>Availability</Grid>
-                                        <Grid>{'availability.status'}</Grid>
+                                        <Grid><strong>Flooring:</strong> {property.flooring ? property.flooring : 'NA'}</Grid>
                                     </Grid>
 
                                     <Grid
@@ -77,30 +87,7 @@ const PropertyDetails = () => {
                                         justifyContent={"space-evenly"}
                                         flexWrap={"wrap"}
                                     >
-                                        <Grid>Floor</Grid>
-                                        <Grid>{'Floor num'}</Grid>
-                                    </Grid>
-
-                                    <Grid
-                                        item
-                                        display={"flex"}
-                                        flexDirection={"column"}
-                                        justifyContent={"space-evenly"}
-                                        flexWrap={"wrap"}
-                                    >
-                                        <Grid>Bedroom</Grid>
-                                        <Grid>{'num of beds'}</Grid>
-                                    </Grid>
-
-                                    <Grid
-                                        item
-                                        display={"flex"}
-                                        flexDirection={"column"}
-                                        justifyContent={"space-evenly"}
-                                        flexWrap={"wrap"}
-                                    >
-                                        <Grid>Age of property</Grid>
-                                        <Grid>{'property.age'}</Grid>
+                                        <Grid><strong>Age of property: </strong> {property.propertyAge ? property.propertyAge : 'NA'}</Grid>
                                     </Grid>
 
                                 </Grid>
@@ -112,8 +99,7 @@ const PropertyDetails = () => {
                                         // flexDirection={"column"}
                                         justifyContent={"space-between"}
                                     >
-                                        <Grid>Monthly Rent</Grid>
-                                        <Grid>{'price.monthly rent'}</Grid>
+                                        <Grid><strong>Monthly Rent:</strong> {property.price.monthlyRent}</Grid>
                                     </Grid>
 
                                     <Grid
@@ -122,8 +108,7 @@ const PropertyDetails = () => {
                                         // flexDirection={"column"}
                                         justifyContent={"space-between"}
                                     >
-                                        <Grid>Security </Grid>
-                                        <Grid>{'price.security'}</Grid>
+                                        <Grid><strong>Security Fee:</strong> {property.price.security}</Grid>
                                     </Grid>
 
                                     <Grid
@@ -132,8 +117,15 @@ const PropertyDetails = () => {
                                         // flexDirection={"column"}
                                         justifyContent={"space-between"}
                                     >
-                                        <Grid>Brokerage </Grid>
-                                        <Grid>{'price..brokerage'}</Grid>
+                                        <Grid><strong>Brokerage:</strong> {property.price.brokerage} </Grid>
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        display={"flex"}
+                                        // flexDirection={"column"}
+                                        justifyContent={"space-between"}
+                                    >
+                                        <Grid><strong>Maintainance:</strong> {property.price.maintenanceCost} </Grid>
                                     </Grid>
 
                                 </Grid>
