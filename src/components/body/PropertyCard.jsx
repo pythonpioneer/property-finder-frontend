@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { likeProperty } from '../../services/user';
+import { useNavigate } from 'react-router';
 
 
 const useStyles = makeStyles({
@@ -15,19 +16,22 @@ const useStyles = makeStyles({
 const PropertyCard = ({ property }) => {
 
     const classes = useStyles();
-    // const [, setLike] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { likedProperties } = useSelector(state => state.user);
 
     // to handle the like 
     const handleLike = () => {
-
-
         dispatch(likeProperty(property?._id));
     }
 
+    // to show the property details
+    const handleClick = () => {
+        navigate('/property-details')
+    }
+
     return (
-        <Card className={classes.card} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
+        <Card className={classes.card} onClick={handleClick} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
             <CardMedia
                 component="img"
                 alt="Property Image"

@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'; // Use Navigate from
 import RegistrationForm from './components/forms/RegistrationForm';
 import Navbar from './components/header/Navbar';
 import Box from './components/body/Box';
+import PropertyDetails from './components/body/PropertyDetails';
 import LoginForm from './components/forms/LoginForm';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +31,8 @@ function App() {
             <Routes>
                 {/* Allow access to all users */}
                 <Route exact path="/" element={<Box />} />
+                <Route exact path="/property-details" element={<PropertyDetails />} />
+
 
                 {/* Allow access to logged-out users only */}
                 <Route exact path="/register" element={!isLoggedIn ? <RegistrationForm /> : <Navigate to="/" />} />
@@ -41,7 +44,7 @@ function App() {
                 <Route path="/add-property" element={isLoggedIn ? <AddPropertyForm /> : <Navigate to="/login" />} />
                 <Route path="/my-properties" element={isLoggedIn ? <Box type={"my"} /> : <Navigate to="/login" />} />
                 <Route path="/liked-properties" element={isLoggedIn ? <Box type={"liked"} /> : <Navigate to="/login" />} />
-
+                
             </Routes>
         </>
     );
