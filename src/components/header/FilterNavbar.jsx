@@ -15,7 +15,8 @@ export default function FilterNavbar() {
                         </span>
                         <div className="dropdown-menu" aria-labelledby="propertyDropdown" style={{ backgroundColor: '#b2b2b2', position: '', top: '28px', left: '0px', zIndex: '99', borderWidth: '0px 2px 2px 2px', borderTop: '0px', borderRadius: '0 0 10px 10px' }}>
                             <Link className="dropdown-item" to="/" style={{ backgroundColor: 'transparent' }}>All Property</Link>
-                            <Link className="dropdown-item" to="#" style={{ backgroundColor: 'transparent' }}>Liked Property</Link>
+                            <Link className="dropdown-item" to="/my-properties" style={{ backgroundColor: 'transparent' }}>My Property</Link>
+                            <Link className="dropdown-item" to="/liked-properties" style={{ backgroundColor: 'transparent' }}>Liked Property</Link>
                             <Link className="dropdown-item" to="/add-property" style={{ backgroundColor: 'transparent' }}>Add property</Link>
                         </div>
                     </div>

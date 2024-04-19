@@ -38,6 +38,9 @@ function App() {
                 <Route path="/user" element={isLoggedIn ? <UserDetails /> : <Navigate to="/login" />} />
                 <Route path="/update" element={isLoggedIn ? <UpdationForm /> : <Navigate to="/login" />} />
                 <Route path="/add-property" element={isLoggedIn ? <AddPropertyForm /> : <Navigate to="/login" />} />
+                <Route path="/my-properties" element={isLoggedIn ? <Box type={"my"} /> : <Navigate to="/login" />} />
+                <Route path="/liked-properties" element={isLoggedIn ? <Box type={"liked"} /> : <Navigate to="/login" />} />
+
             </Routes>
         </>
     );

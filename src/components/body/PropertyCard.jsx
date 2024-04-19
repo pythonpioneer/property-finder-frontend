@@ -23,7 +23,7 @@ const PropertyCard = ({ property }) => {
                 image={property.images[0]}
             />
             <CardContent>
-                <Typography className='text-bold' gutterBottom variant="" component="">
+                <Typography className='text-bold' gutterBottom variant="subtitle1" component="">
                     {property.desc}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">

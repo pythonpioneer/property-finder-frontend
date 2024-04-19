@@ -46,8 +46,32 @@ const fetchAllProperty = createAsyncThunk('fetchAllProperty', async () => {
             toast.error(err?.response?.data?.message || "Failed!!");
             throw err;
         });
-})
+});
+
+// to fetch all the property, login not required
+const fetchMyProperty = createAsyncThunk('fetchMyProperty', async () => {
+
+    // fetch the auth token from local storage
+    const token = localStorage.getItem('auth-token');
+
+    // set the headers for the request
+    const config = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'auth-token': token,
+        },
+    };
+
+    return axios.get(`${URL}${APIPATH}user/properties`, config)
+        .then(response => {
+            return response.data;
+        })
+        .catch(err => {  // to handle errors
+            toast.error(err?.response?.data?.message || "Failed!!");
+            throw err;
+        });
+});
 
 
 // export function
-export { addProperty, fetchAllProperty };
+export { addProperty, fetchAllProperty, fetchMyProperty };

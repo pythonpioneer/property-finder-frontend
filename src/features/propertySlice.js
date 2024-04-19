@@ -1,13 +1,13 @@
 // importing requirements
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { fetchAllProperty } from "../services/property";
-import { formatDateTime } from "../utils";
+import { fetchAllProperty, fetchMyProperty } from "../services/property";
 
 
 // global states of properties
 const initialState = {
     properties: [],
+    myProperties: [],
     isLoading: false,
     hasErrors: false,
     totalProperties: 0,
@@ -45,6 +45,21 @@ const propertySlice = createSlice({
                 state.properties = action.payload?.properties;
             })
             .addCase(fetchAllProperty.rejected , (state, action) => {
+                state.hasErrors = true;
+                state.isLoading = false;
+            })
+
+            // fetching my properties
+            .addCase(fetchMyProperty.pending , (state) => {
+                state.isLoading = true;
+                state.hasErrors = false;
+            })
+            .addCase(fetchMyProperty.fulfilled , (state, action) => {
+                state.isLoading = false;
+                state.hasErrors = false;
+                state.myProperties = action.payload?.properties;
+            })
+            .addCase(fetchMyProperty.rejected , (state, action) => {
                 state.hasErrors = true;
                 state.isLoading = false;
             })
