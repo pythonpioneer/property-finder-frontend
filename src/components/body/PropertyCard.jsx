@@ -4,31 +4,31 @@ import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@materia
 
 const PropertyCard = ({ property }) => {
     return (
-        <Card style={{ margin: '20px' }}>
+        <Card style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
             <CardMedia
                 component="img"
                 alt="Property Image"
                 height="200"
-                image={"https://res.cloudinary.com/hrk/image/upload/v1713443056/epkymf2ufubajq8mlv0n.jpg"}
+                image={property.images[0]}
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {"property.desc"}
+                <Typography className='text-bold' gutterBottom variant="" component="">
+                    {property.desc}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Price:</strong> Rs. {"property.price.monthlyRent"}
+                    <strong>Price:</strong> Rs. {property.price.monthlyRent}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Property Type:</strong> {"property.propertyType"}
+                    <strong>Property Type:</strong> {property.propertyType}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Furnishing:</strong> {"property.furnishing"}
+                    <strong>Furnishing:</strong> {property.furnishing}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Preferred Tenant:</strong> {"property.preferredTenant[0].join(', ')"}
+                    <strong>Preferred Tenant:</strong> {property.preferredTenant[0].join(', ')}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Location:</strong> {"property.location.district"}, Sector {"property.location.sector"}
+                    <strong>Location:</strong> {property.location.district}, Sector {"property.location.sector"}
                 </Typography>
             </CardContent>
         </Card>
