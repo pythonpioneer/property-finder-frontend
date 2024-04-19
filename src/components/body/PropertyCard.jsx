@@ -29,7 +29,7 @@ const PropertyCard = ({ property }) => {
         else setLike(true);
         if (!likedProperties) setLike(false)
 
-        dispatch(likeProperty(property._id));
+        dispatch(likeProperty(property?._id));
     }
 
     return (
@@ -38,28 +38,28 @@ const PropertyCard = ({ property }) => {
                 component="img"
                 alt="Property Image"
                 height="200"
-                image={property.images[0]}
+                image={property?.images[0]}
             />
             <CardContent>
                 <Typography className='text-bold' gutterBottom variant="subtitle1" component="">
                     {property.desc}
-                    <i className={`fa-${likedProperties?.indexOf(property._id)+1 ? 'solid' : 'regular'} fa-heart`} onClick={handleLike} style={{ float: 'right', fontSize: '30px', color: 'red' }}></i>
+                    <i className={`fa-${likedProperties?.indexOf(property?._id)+1 ? 'solid' : 'regular'} fa-heart`} onClick={handleLike} style={{ float: 'right', fontSize: '30px', color: 'red' }}></i>
                 </Typography>
                 <Typography variant="body2" color="textSecondary" style={{ fontSize: '16px', marginLeft: '5px', marginBottom: '-2px', float: 'right' }}>Like </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Price:</strong> Rs. {property.price.monthlyRent}
+                    <strong>Price:</strong> Rs. {property?.price?.monthlyRent}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Property Type:</strong> {property.propertyType}
+                    <strong>Property Type:</strong> {property?.propertyType}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Furnishing:</strong> {property.furnishing}
+                    <strong>Furnishing:</strong> {property?.furnishing}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Preferred Tenant:</strong> {property.preferredTenant[0].join(', ')}
+                    <strong>Preferred Tenant:</strong> {property?.preferredTenant[0]?.join(', ')}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    <strong>Location:</strong> {property.location.district}, Sector {property.location.sector}
+                    <strong>Location:</strong> {property?.location?.district}, Sector {property?.location?.sector}
                 </Typography>
             </CardContent>
         </Card>

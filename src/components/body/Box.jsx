@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import PropertyCard from './PropertyCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProperty, fetchLikedProperty, fetchMyProperty } from '../../services/property';
@@ -9,7 +9,8 @@ export default function Box(props) {
 
     // to call the actions
     const dispatch = useDispatch();
-    const { properties, isLoading, myProperties, likedProperties } = useSelector(state => state.property);
+    const { properties, isLoading, myProperties } = useSelector(state => state.property);
+    const { likedProperties } = useSelector(state => state.user);
 
     useEffect(() => {
 
@@ -35,17 +36,19 @@ export default function Box(props) {
 
     return (
         <Grid container spacing={0} justifyContent="center">
-
-            {allProperties?.map((property, idx) => {
-                return (
-                    <Grid key={idx} item lg={4} md={6} sm={12}>
-                        <PropertyCard property={property} />
-                    </Grid>
-                )
-            })}
-
-            {!isLoading && !allProperties?.length && (<h2>No Data to display</h2>)}
-            {isLoading && (<h2>Loading...</h2>)}
-        </Grid>
+        {allProperties?.length > 0 ? (
+            allProperties.map((property, idx) => (
+                <Grid key={idx} item lg={4} md={6} sm={12}>
+                    <PropertyCard property={property} />
+                </Grid>
+            ))
+        ) : (
+            <Grid item>
+                <Typography variant="h6">No properties to display.</Typography>
+            </Grid>
+        )}
+        {!isLoading && !allProperties.length && <Typography variant="h6">No properties to display.</Typography>}
+        {isLoading && <Typography variant="h6">Loading...</Typography>}
+    </Grid>
     );
 }
