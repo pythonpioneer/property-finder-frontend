@@ -6,7 +6,7 @@ import Box from './components/body/Box';
 import LoginForm from './components/forms/LoginForm';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from './features/userSlice';
+import { loginUser, setLikedProperties } from './features/userSlice';
 import UserDetails from './components/app/UserDetails';
 import UpdationForm from './components/forms/UpdateForm';
 import FilterNavbar from './components/header/FilterNavbar';
@@ -20,6 +20,7 @@ function App() {
     // Dispatch loginUser action on component mount to check login status
     useEffect(() => {
         dispatch(loginUser());
+        dispatch(setLikedProperties());
     }, [dispatch]);
 
     return (

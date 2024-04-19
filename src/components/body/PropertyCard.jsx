@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { likeProperty } from '../../services/property';
+import { useDispatch, useSelector } from 'react-redux';
+import { likeProperty } from '../../services/user';
 
 
 const useStyles = makeStyles({
@@ -17,11 +17,18 @@ const PropertyCard = ({ property }) => {
     const classes = useStyles();
     const [like, setLike] = useState(false);
     const dispatch = useDispatch();
+    const { likedProperties } = useSelector(state => state.user);
 
     // to handle the like 
     const handleLike = () => {
+
         // call the action to like
-        setLike(!like);
+        if(likedProperties?.indexOf(property._id) >= 0) {
+            setLike(false);
+        }
+        else setLike(true);
+        if (!likedProperties) setLike(false)
+
         dispatch(likeProperty(property._id));
     }
 
@@ -36,7 +43,7 @@ const PropertyCard = ({ property }) => {
             <CardContent>
                 <Typography className='text-bold' gutterBottom variant="subtitle1" component="">
                     {property.desc}
-                    <i className={`fa-${like ? 'solid' : 'regular'} fa-heart`} onClick={handleLike} style={{ float: 'right', fontSize: '30px', color: 'red' }}></i>
+                    <i className={`fa-${likedProperties?.indexOf(property._id)+1 ? 'solid' : 'regular'} fa-heart`} onClick={handleLike} style={{ float: 'right', fontSize: '30px', color: 'red' }}></i>
                 </Typography>
                 <Typography variant="body2" color="textSecondary" style={{ fontSize: '16px', marginLeft: '5px', marginBottom: '-2px', float: 'right' }}>Like </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">

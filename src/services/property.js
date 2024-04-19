@@ -112,8 +112,7 @@ const likeProperty = createAsyncThunk('likeProperty', async (propertyId) => {
     // now, like the property
     return axios.patch(`${URL}${APIPATH}user/${propertyId}/like`, {}, config)
         .then(response => {
-            // return response.data;
-            console.log(response.data)
+            return response.data;
         })
         .catch(err => {  // to handle errors
             toast.error(err?.response?.data?.message || "Failed!!");
@@ -124,4 +123,4 @@ const likeProperty = createAsyncThunk('likeProperty', async (propertyId) => {
 
 
 // export function
-export { addProperty, fetchAllProperty, fetchMyProperty, fetchLikedProperty, likeProperty };
+export { addProperty, fetchAllProperty, fetchMyProperty, fetchLikedProperty };

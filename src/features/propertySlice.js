@@ -83,6 +83,7 @@ const propertySlice = createSlice({
                 state.hasErrors = true;
                 state.isLoading = false;
             })
+
     }
 });
 

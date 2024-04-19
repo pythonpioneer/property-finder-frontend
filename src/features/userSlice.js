@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserInfo, registerUser, signInUser, updateContact, updateUserType } from "../services/user";
+import { fetchUserInfo, registerUser, signInUser, updateContact, updateUserType, likeProperty } from "../services/user";
 import { toast } from "react-toastify";
 import { formatDateTime } from "../utils";
 import { clearAllProperties } from "./propertySlice";
@@ -31,7 +31,6 @@ const userSlice = createSlice({
     reducers: {
         loginUser: (state, action) => {  // if there is authentication token in the local storage then logged in the user
             state.isLoggedIn = Boolean(localStorage?.getItem('auth-token'));
-            state.isLoggedIn = true;
             state.likedProperties = action.payload?.likedProperties;
         },
         logoutUser: (state) => {
@@ -54,6 +53,9 @@ const userSlice = createSlice({
                 state.isLoggedIn = false;
                 toast.info("User Already Logged Out.");
             }
+        },
+        setLikedProperties: (state, action) => {
+            state.likedProperties = localStorage.getItem('liked-properties')?.split(',');
         }
     },
     extraReducers: (builder) => {
@@ -144,10 +146,25 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.hasErrors = true;
             })
+
+            // like property
+            .addCase(likeProperty.pending , (state) => {
+                state.isLoading = true;
+                state.hasErrors = false;
+            })
+            .addCase(likeProperty.fulfilled , (state, action) => {
+                state.isLoading = false;
+                state.hasErrors = false;
+                state.likedProperties = action.payload?.likedProperties;
+            })
+            .addCase(likeProperty.rejected , (state, action) => {
+                state.hasErrors = true;
+                state.isLoading = false;
+            })
     }
 });
 
 
 // now export the reducers and actions
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser, logoutUser, setLikedProperties } = userSlice.actions;
 export default userSlice.reducer;
