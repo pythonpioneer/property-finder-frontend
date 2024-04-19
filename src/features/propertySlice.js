@@ -17,7 +17,6 @@ const initialState = {
     filters: {
         search: '',
         propertyType: '',
-        preferredTenant: [],
         minPrice: '',
         maxPrice: '',
         sector: '',
@@ -49,6 +48,9 @@ const propertySlice = createSlice({
         },
         setFilters: (state, action) => {
             state.filters = action.payload
+        },
+        clearFilters: (state, _) => {
+            state.filters = {};
         }
     },
     extraReducers: (builder) => {
@@ -102,5 +104,5 @@ const propertySlice = createSlice({
 
 
 // now export the reducers and actions
-export const { setCurrPage, setTotalProperties, removeAllProperties, clearAllProperties, setSearch, setFilters } = propertySlice.actions;
+export const { setCurrPage, setTotalProperties, removeAllProperties, clearAllProperties, setSearch, setFilters, clearFilters } = propertySlice.actions;
 export default propertySlice.reducer;

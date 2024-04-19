@@ -44,7 +44,6 @@ const fetchAllProperty = createAsyncThunk('fetchAllProperty', async (filters) =>
 
     // Adding filters to the URL
     if (filters.propertyType) url += `&propertyType=${filters.propertyType}`;
-    if (filters.preferredTenant.length) url += `&preferredTenant=${filters.preferredTenant.join(',')}`;
     if (filters.minPrice) url += `&minPrice=${filters.minPrice}`;
     if (filters.maxPrice) url += `&maxPrice=${filters.maxPrice}`;
     if (filters.sector) url += `&sector=${filters.sector}`;

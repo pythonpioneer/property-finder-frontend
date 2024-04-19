@@ -1,14 +1,13 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setFilters, setSearch } from '../../features/propertySlice';
+import { clearFilters, setFilters, setSearch } from '../../features/propertySlice';
 
 export default function FilterNavbar() {
     // to store the search value
     const dispatch = useDispatch();
     const searchRef = useRef(null);
     const propertyTypeRef = useRef(null);
-    const preferredTenantRef = useRef(null);
     const minPriceRef = useRef(null);
     const maxPriceRef = useRef(null);
     const sectorRef = useRef(null);
@@ -21,13 +20,10 @@ export default function FilterNavbar() {
 
     // to handle all the filters
     const handleFilters = () => {
-        const propertyType = propertyTypeRef.current.querySelector('input[name="propertyType"]:checked').value;
-        const preferredTenantCheckboxes = preferredTenantRef.current.querySelectorAll('input[name="preferredTenant"]:checked');
-        const preferredTenantValues = Array.from(preferredTenantCheckboxes).map(checkbox => checkbox.value);
+        const propertyType = propertyTypeRef.current?.querySelector('input[name="propertyType"]:checked')?.value;
 
         const filters = {
             propertyType: propertyType,
-            preferredTenant: preferredTenantValues,
             minPrice: minPriceRef.current.value,
             maxPrice: maxPriceRef.current.value,
             sector: sectorRef.current.value,
@@ -36,6 +32,11 @@ export default function FilterNavbar() {
         }
 
         dispatch(setFilters(filters));
+    }
+
+    // to clear all filters
+    const handleClearFilters = () => {
+        dispatch(clearFilters());
     }
 
     return (
@@ -70,16 +71,6 @@ export default function FilterNavbar() {
                                         <input type="radio" id="1bhk" name="propertyType" value="1bhk" /> <label htmlFor="1bhk">1 BHK</label>
                                         <input type="radio" id="2bhk" name="propertyType" value="2bhk" /> <label htmlFor="2bhk">2 BHK</label>
                                         <input type="radio" id="3bhk" name="propertyType" value="3bhk" /> <label htmlFor="3bhk">3 BHK</label>
-                                        <input type="radio" id="4bhk" name="propertyType" value="4bhk" /> <label htmlFor="4bhk">4+ BHK</label>
-                                    </div>
-                                    <div ref={preferredTenantRef} style={{ flex: 1 }}>
-                                        <label htmlFor="preferredTenant"><strong>Preferred Tenant:</strong></label>
-                                        <br />
-                                        <input type="checkbox" id="boys" name="preferredTenant" value="boys" /> <label htmlFor="boys">Boys</label>
-                                        <input type="checkbox" id="girls" name="preferredTenant" value="girls" /> <label htmlFor="girls">Girls</label>
-                                        <input type="checkbox" id="studio" name="preferredTenant" value="studio" /> <label htmlFor="studio">Studio</label>
-                                        <input type="checkbox" id="couples" name="preferredTenant" value="couples" /> <label htmlFor="couples">Couples</label>
-                                        <input type="checkbox" id="family" name="preferredTenant" value="family" /> <label htmlFor="family">Family</label>
                                     </div>
                                     <div style={{ flex: 1 }}>
                                         <label htmlFor="priceRange"><strong>Price Range:</strong></label>
@@ -99,7 +90,8 @@ export default function FilterNavbar() {
                                             <input ref={cityRef} type="text" className="form-control mb-2" placeholder="City" />
                                         </div>
                                     </div>
-                                    <div style={{ flex: 1 }}>
+                                    <div className='d-flex justify-content-between' style={{ flex: 1 }}>
+                                        <button className="btn btn-primary" onClick={handleClearFilters}>Clear Filters</button>
                                         <button className="btn btn-primary" onClick={handleFilters}>Apply Filters</button>
                                     </div>
                                 </div>

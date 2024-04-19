@@ -9,7 +9,7 @@ export default function Box(props) {
 
     // to call the actions
     const dispatch = useDispatch();
-    const { properties, isLoading, myProperties, filters } = useSelector(state => state.property);
+    const { properties, isLoading, myProperties, filters, clearFilters } = useSelector(state => state.property);
     const { likedProperties } = useSelector(state => state.user);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function Box(props) {
         else {
             dispatch(fetchAllProperty(filters));
         }
-    }, [dispatch, props.type, filters]);
+    }, [dispatch, props.type, filters, clearFilters]);
 
     // display data from requested type
     let allProperties = props.type === 'my' ? myProperties : 
