@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { likeProperty } from '../../services/property';
 
 
 const useStyles = makeStyles({
@@ -14,11 +16,13 @@ const PropertyCard = ({ property }) => {
 
     const classes = useStyles();
     const [like, setLike] = useState(false);
+    const dispatch = useDispatch();
 
     // to handle the like 
     const handleLike = () => {
         // call the action to like
         setLike(!like);
+        dispatch(likeProperty(property._id));
     }
 
     return (

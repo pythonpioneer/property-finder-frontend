@@ -11,7 +11,6 @@ const initialState = {
     likedProperties: [],
     isLoading: false,
     hasErrors: false,
-    totalProperties: 0,
     currPage: 2,
 
     // to handle search and filters
@@ -32,6 +31,11 @@ const propertySlice = createSlice({
         removeAllProperties: (state) => {  // generally used, when user logged out
             state.properties = [];
         },
+        clearAllProperties: (state) => {  // generally called while loggin out user
+            // do not clear state.properties, it is not associated to any logged in user
+            state.likedProperties = [];
+            state.myProperties = [];
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -84,5 +88,5 @@ const propertySlice = createSlice({
 
 
 // now export the reducers and actions
-export const { setCurrPage, setTotalProperties, removeAllProperties } = propertySlice.actions;
+export const { setCurrPage, setTotalProperties, removeAllProperties, clearAllProperties } = propertySlice.actions;
 export default propertySlice.reducer;

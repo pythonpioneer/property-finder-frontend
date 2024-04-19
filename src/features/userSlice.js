@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserInfo, registerUser, signInUser, updateContact, updateUserType } from "../services/user";
 import { toast } from "react-toastify";
 import { formatDateTime } from "../utils";
+import { clearAllProperties } from "./propertySlice";
 
 
 // initial global state of the application
@@ -19,7 +20,8 @@ const initialState = {
         createdAt: "...",
         updatedAt: "...",
         _id: null
-    }
+    },
+    likedProperties: [],
 }
 
 // now create the user slice
@@ -27,9 +29,10 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        loginUser: (state) => {  // if there is authentication token in the local storage then logged in the user
+        loginUser: (state, action) => {  // if there is authentication token in the local storage then logged in the user
             state.isLoggedIn = Boolean(localStorage?.getItem('auth-token'));
             state.isLoggedIn = true;
+            state.likedProperties = action.payload?.likedProperties;
         },
         logoutUser: (state) => {
             const isUserLoggedIn = Boolean(localStorage?.getItem('auth-token'));
@@ -40,6 +43,12 @@ const userSlice = createSlice({
 
                 // remove the token from localStorage
                 localStorage.clear('auth-token');
+
+                // clear all the data from redux 
+                state.likedProperties = [];
+
+                // now, clear all properties stored in propertySlice
+                clearAllProperties();
             }
             else {
                 state.isLoggedIn = false;

@@ -1,5 +1,5 @@
 // importing all requirements
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, isAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { PATH } from '../constants';
 import { toast } from "react-toastify";
@@ -44,7 +44,7 @@ const signInUser = createAsyncThunk('signInUser', async (formData) => {
         .then(response => {  // user logged in successfully
             toast.success(response?.data?.message || "Logged in!!");
             localStorage.setItem('auth-token', response.data['auth-token']);  // to store the token 
-            return;
+            return response.data;
         })
         .catch(err => {  // to handle errors
             toast.error(err?.response?.data?.message || "Failed!!")
