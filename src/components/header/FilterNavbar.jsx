@@ -37,7 +37,7 @@ export default function FilterNavbar() {
                         </div>
 
                         <div className="nav-item dropdown" style={{ position: 'relative' }}>
-                            <span className="nav-link header-text smaller-font active-menu" to="#" id="propertyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span className="nav-link header-text smaller-font active-menu ml-3" to="#" id="propertyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Filters
                             </span>
                             <div className="dropdown-menu" aria-labelledby="propertyDropdown" style={{ backgroundColor: '#b2b2b2', position: '', top: '28px', left: '0px', zIndex: '99', borderWidth: '0px 2px 2px 2px', borderTop: '0px', borderRadius: '0 0 10px 10px' }}>
