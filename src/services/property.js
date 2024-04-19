@@ -72,6 +72,31 @@ const fetchMyProperty = createAsyncThunk('fetchMyProperty', async () => {
         });
 });
 
+// to fetch liked properties
+const fetchLikedProperty = createAsyncThunk('fetchLikedProperty', async () => {
+
+    // fetch the auth token from local storage
+    const token = localStorage.getItem('auth-token');
+
+    // set the headers for the request
+    const config = {
+        headers: {
+            'auth-token': token,
+        },
+    };
+
+    // fetch the liked properties
+    return axios.get(`${URL}${APIPATH}user/liked-properties`, config)
+        .then(response => {
+            return response.data;
+        })
+        .catch(err => {  // to handle errors
+            toast.error(err?.response?.data?.message || "Failed!!");
+            throw err;
+        });
+});
+
+
 
 // export function
-export { addProperty, fetchAllProperty, fetchMyProperty };
+export { addProperty, fetchAllProperty, fetchMyProperty, fetchLikedProperty };
