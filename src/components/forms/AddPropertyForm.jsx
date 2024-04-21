@@ -8,7 +8,7 @@ import { addProperty } from "../../services/property";
 const PropertyForm = () => {
     const [propertyType, setPropertyType] = useState("");
     const [furnishingType, setFurnishingType] = useState("");
-    const [area, setArea] = useState("");
+
     const [preferredTenant, setPreferredTenant] = useState([]);
 
     const handlePropertyTypeChange = (event) => {
@@ -27,10 +27,6 @@ const PropertyForm = () => {
 
     const handleFurnishingTypeChange = (event) => {
         setFurnishingType(event.target.value);
-    };
-
-    const handleAreaChange = (event) => {
-        setArea(event.target.value);
     };
 
     const [image, setImage] = useState(null);

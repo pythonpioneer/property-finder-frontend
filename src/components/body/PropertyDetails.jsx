@@ -28,8 +28,8 @@ const PropertyDetails = () => {
     return (
         <>
             <Grid container mt={5} justifyContent={"center"}>
-                <Grid item md={10} p={2}>
-                    <Paper style={{ backgroundColor: 'transparent' }}>
+                <Grid item md={10} p={2} style={{  }}>
+                    <Paper style={{ backgroundColor: 'transparent', border: '3px solid black', boxShadow: '7px 7px 7px 7px gray' }}>
                         <i className="fa-solid fa-x mr-3 mt-2" onClick={handleGoBack} style={{ float: 'right' }}></i>
                         <Grid container p={4}>
                             {/* Image of property will be added here */}
@@ -83,7 +83,7 @@ const PropertyDetails = () => {
                                 {/* flex container showing remaining info of property */}
                                 <Grid
                                     item
-                                    padding={4}
+                                    padding={1}
                                     display={"flex"}
                                     alignItems={"center"}
                                     flexWrap={"wrap"}
@@ -114,7 +114,7 @@ const PropertyDetails = () => {
 
                                 </Grid>
 
-                                <Grid item paddingX={5} md={7} sx={{ fontSize: '14px' }}>
+                                <Grid item paddingX={1} md={7} sx={{ fontSize: '14px' }}>
                                     <Grid
                                         item
                                         display={"flex"}
@@ -150,7 +150,12 @@ const PropertyDetails = () => {
                                         <Grid><strong>Maintainance:</strong> {property.price.maintenanceCost} </Grid>
                                     </Grid>
 
-                                <button className="px-3 py-2 mt-2" style={{ backgroundColor: 'blue', color: 'whitesmoke' }}>Contact Owner</button>
+                                    <div className="mt-3" style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <strong style={{ textDecoration: 'underline' }}>Contact Details</strong>
+                                        <span><strong>Name:</strong> {property.owner.name}</span>
+                                        <span><strong>Email:</strong> {property.owner.email}</span>
+                                        <span><strong>Mobile Number:</strong> {property.owner.contactNumber}</span>
+                                    </div>
                                 </Grid>
 
                             </Grid>

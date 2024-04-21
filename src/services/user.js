@@ -1,5 +1,5 @@
 // importing all requirements
-import { createAsyncThunk, isAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { PATH } from '../constants';
 import { toast } from "react-toastify";
