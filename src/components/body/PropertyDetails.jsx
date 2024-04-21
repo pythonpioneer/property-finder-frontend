@@ -1,12 +1,14 @@
 import { Grid, Paper } from "@mui/material";
 import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const PropertyDetails = () => {
 
     const location = useLocation();
     const property = location.state.property;
+    const navigate = useNavigate();
+
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -18,11 +20,17 @@ const PropertyDetails = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex - 1 + property.images.length) % property.images.length);
     };
 
+    // to take back the route
+    const handleGoBack = () => {
+        navigate(-1);
+    };
+
     return (
         <>
             <Grid container mt={5} justifyContent={"center"}>
                 <Grid item md={10} p={2}>
-                    <Paper>
+                    <Paper style={{ backgroundColor: 'transparent' }}>
+                        <i className="fa-solid fa-x mr-3 mt-2" onClick={handleGoBack} style={{ float: 'right' }}></i>
                         <Grid container p={4}>
                             {/* Image of property will be added here */}
                             <Grid item xs={12} md={5} sx={{ height: '400px', position: 'relative', overflow: 'hidden' }}>
