@@ -150,6 +150,7 @@ const PropertyDetails = () => {
                                         <Grid><strong>Maintainance:</strong> {property.price.maintenanceCost} </Grid>
                                     </Grid>
 
+                                <button className="px-3 py-2 mt-2" style={{ backgroundColor: 'blue', color: 'whitesmoke' }}>Contact Owner</button>
                                 </Grid>
 
                             </Grid>
