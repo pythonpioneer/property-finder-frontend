@@ -1,21 +1,10 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, makeStyles } from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import { likeProperty } from '../../services/user';
 import { useNavigate } from 'react-router';
 
-
-const useStyles = makeStyles({
-    card: {
-        '@media (max-width: 600px)': {
-            width: '330px', // Adjust the width for smaller screens
-        },
-    }
-});
-
 const PropertyCard = ({ property }) => {
-
-    const classes = useStyles();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { likedProperties } = useSelector(state => state.user);
@@ -31,7 +20,7 @@ const PropertyCard = ({ property }) => {
     }
 
     return (
-        <Card className={classes.card} onClick={handleClick} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
+        <Card onClick={handleClick} style={{ margin: '20px', height: '380px', backgroundColor: 'transparent' }}>
             <CardMedia
                 component="img"
                 alt="Property Image"

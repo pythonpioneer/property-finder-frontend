@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from "@mui/material";
 import PropertyCard from './PropertyCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProperty, fetchLikedProperty, fetchMyProperty } from '../../services/property';
