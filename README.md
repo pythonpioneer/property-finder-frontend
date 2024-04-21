@@ -63,6 +63,9 @@ password: hrk123
   ```
   npm install
   ```
+  or
+  
+      npm install --force
   
 - Create a `.env` file at root directory (same as `.env.sample`)
 
