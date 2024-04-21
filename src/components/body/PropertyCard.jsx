@@ -10,7 +10,8 @@ const PropertyCard = ({ property }) => {
     const { likedProperties } = useSelector(state => state.user);
 
     // to handle the like 
-    const handleLike = () => {
+    const handleLike = (event) => {
+        event.stopPropagation(); // Stop propagation of the click event
         dispatch(likeProperty(property?._id));
     }
 
@@ -30,7 +31,11 @@ const PropertyCard = ({ property }) => {
             <CardContent>
                 <Typography className='text-bold' gutterBottom variant="subtitle1" component="">
                     {property.desc}
-                    <i className={`fa-${likedProperties?.indexOf(property?._id)+1 ? 'solid' : 'regular'} fa-heart`} onClick={handleLike} style={{ float: 'right', fontSize: '30px', color: 'red' }}></i>
+                    <i
+                        className={`fa-${likedProperties?.indexOf(property?._id)+1 ? 'solid' : 'regular'} fa-heart`}
+                        onClick={handleLike}
+                        style={{ float: 'right', fontSize: '30px', color: 'red' }}
+                    ></i>
                 </Typography>
                 <Typography variant="body2" color="textSecondary" style={{ fontSize: '16px', marginLeft: '5px', marginBottom: '-2px', float: 'right' }}>Like </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
